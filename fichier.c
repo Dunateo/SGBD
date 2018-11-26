@@ -23,10 +23,10 @@ Affichage du Menu
 void affichageMenu() {
   printf("#-----------------------------------------#\n");
   printf("#----------1---SELECTION------------------#\n");
-  printf("#-------------de votre bdd----------------#\n");
-  printf("#------------2---CREATE-------------------#\n");
+  printf("#----------2---CREATE---------------------#\n");
   printf("#-----------------------------------------#\n");
 }
+
 /**
 Création des dépendances du programme
 **/
@@ -48,10 +48,15 @@ void selectionMenu(int *valMenu){
 
   *valMenu = val;
 }
+/**
+Action selon le mode
+**/
 void executionSelect(int valMenu){
 
   switch (valMenu) {
     case 1:system("bash ./script/affichageBDD.sh");
+          
+
     break;
 
     case 2:system("bash ./script/creationBDD.sh");
