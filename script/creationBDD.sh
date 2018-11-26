@@ -2,7 +2,9 @@
 cd data
 echo "Création d'une BDD rentrer le nom:"
 read nom
-if [ !-d $nom ];then
+if [ -d $nom ];then
+  echo "La BDD existe déja";
+else
   mkdir $nom
   cd $nom
   echo "Combien de tables ?:"
@@ -24,5 +26,4 @@ if [ !-d $nom ];then
 
   done
   echo "la création de $nom"
-else
-  echo "La BDD existe déja";
+fi

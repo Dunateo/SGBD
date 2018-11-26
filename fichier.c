@@ -9,9 +9,11 @@ int main(int argc, char const *argv[]) {
   int valMenu = 0;
 
   intialisationData();
-  affichageMenu();
-  selectionMenu(&valMenu);
-  executionSelect(valMenu);
+  do{
+    affichageMenu();
+    selectionMenu(&valMenu);
+    executionSelect(valMenu);
+  }while (valMenu != 3);
 
 
   return 0;
@@ -24,6 +26,7 @@ void affichageMenu() {
   printf("#-----------------------------------------#\n");
   printf("#----------1---SELECTION------------------#\n");
   printf("#----------2---CREATE---------------------#\n");
+  printf("#----------3---QUIT-----------------------#\n");
   printf("#-----------------------------------------#\n");
 }
 
@@ -44,7 +47,7 @@ void selectionMenu(int *valMenu){
     printf("Merci de Sélectionner un Menu ?\n");
     scanf("%d",&val);
 
-  } while(val < 1 || val > 2); // deux seules valeurs que peut prendre le systeme
+  } while(val < 1 || val > 3); // deux seules valeurs que peut prendre le systeme
 
   *valMenu = val;
 }
@@ -55,7 +58,7 @@ void executionSelect(int valMenu){
 
   switch (valMenu) {
     case 1:system("bash ./script/affichageBDD.sh");
-          
+
 
     break;
 
