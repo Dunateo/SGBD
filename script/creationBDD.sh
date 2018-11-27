@@ -46,5 +46,8 @@ else
 		done	
 	
   done
-  echo "la création de $nom"
+  echo "Hop ta BDD est crée $nom"
+  cd ../data/
+  ls > ../script/structure.txt
 fi
+read -p "Appuyer sur une touche pour continuer ..."

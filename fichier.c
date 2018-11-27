@@ -61,33 +61,21 @@ void executionSelect(int valMenu){
 
   switch (valMenu) {
     case 1:system("bash ./script/affichageBDD.sh");
-
-
     break;
 
     case 2:system("bash ./script/creationBDD.sh");
     break;
   }
 }
+/**
+Lecture du fichier de structure
+**/
+void initialisationBDD(bdd *Base){
+  FILE *f;
+  int countBDD;
+  f = fopen("../script/structure.txt","r");
+  if(f == NULL)
+		printf("fichier non ouvert\n");
+  Base = malloc(sizeof(bdd)*)
 
-
-
- 
-/*void recupereBDD(){
-	FILE* fichierStruct;
-	fichierStruct =  fopen("./script/structure.txt"," rt" );
-	char chaineBDD[100];
-	//char chaineTable[100];
-	//char chaineElement[100];
-	if (fichierStruct != NULL)
-    {
-        do{
-			fscanf(fichierStruct, "./%s:",chaineBDD);
-		}
-		while()
-    }
-    else
-    {
-        printf("Impossible d'ouvrir le fichier structure.txt");
-    }
-*/
+}
