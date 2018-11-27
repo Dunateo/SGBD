@@ -8,4 +8,7 @@ fi
 cd script
 touch structure.txt
 cd ../data/
-ls > ../script/structure.txt
+ls -1 | wc -l> ../script/structure.txt
+ls >> ../script/structure.txt
+ls -1 -d */* | wc -l>> ../script/structure.txt
+ls -d */* >> ../script/structure.txt
