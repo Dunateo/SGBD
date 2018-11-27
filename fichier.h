@@ -3,6 +3,7 @@ typedef struct bdd{
   int nbtable;
   char *nomtable;
   int nbelem;
+  
 }bdd;
 void affichageMenu();
 void intialisationData();

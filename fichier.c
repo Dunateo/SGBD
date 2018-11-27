@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fichier.h"
 
 /**
@@ -29,6 +30,8 @@ void affichageMenu() {
   printf("#----------3---QUIT-----------------------#\n");
   printf("#-----------------------------------------#\n");
 }
+
+
 
 /**
 Création des dépendances du programme
@@ -66,3 +69,25 @@ void executionSelect(int valMenu){
     break;
   }
 }
+
+
+
+ 
+/*void recupereBDD(){
+	FILE* fichierStruct;
+	fichierStruct =  fopen("./script/structure.txt"," rt" );
+	char chaineBDD[100];
+	//char chaineTable[100];
+	//char chaineElement[100];
+	if (fichierStruct != NULL)
+    {
+        do{
+			fscanf(fichierStruct, "./%s:",chaineBDD);
+		}
+		while()
+    }
+    else
+    {
+        printf("Impossible d'ouvrir le fichier structure.txt");
+    }
+*/

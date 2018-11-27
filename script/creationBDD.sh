@@ -16,14 +16,35 @@ else
     touch $deuxnom.txt
     echo "nombre d'élements dans la table ?:"
     read nbelem
-
-    for ((h=0 ; $h<$nbelem ; h++))
-    do
-    echo "Nom élements:"
-    read nomelem
-    echo -n "$nomelem|">> $deuxnom.txt
-    done
-
+		
+		for ((h=0 ; $h<$nbelem ; h++))
+		do
+		echo "Type de l'élements:"
+		echo "#-----------------------------------------#"
+		echo "#----------1---INT------------------------#"
+		echo "#----------2---CHAR-----------------------#"
+		echo "#----------3---FLOAT----------------------#"
+		echo "#----------4---PRIMARY KEY----------------#"
+		echo "#-----------------------------------------#"
+		read typeelem
+			if [ $typeelem -eq 0 -o  $typeelem -gt 4 ] ;
+			then
+				echo "Ce type n'éxiste pas";
+			else
+			echo "Type de l'élements:"
+				echo "#-----------------------------------------#"
+				echo "#----------1---INT------------------------#"
+				echo "#----------2---CHAR-----------------------#"
+				echo "#----------3---FLOAT----------------------#"
+				echo "#----------4---PRIMARY KEY----------------#"
+				echo "#-----------------------------------------#"
+				echo -n "$typeelem|">> $deuxnom.txt
+				echo "Nom élements:"
+				read nomelem
+				echo -n "$nomelem|">> $deuxnom.txt
+				fi
+		done	
+	
   done
   echo "la création de $nom"
 fi
