@@ -25,5 +25,6 @@ else
     done
 
   done
-  echo "la création de $nom"
+  echo "Hop ta BDD est crée $nom"
 fi
+read -p "Appuyer sur une touche pour continuer ..."

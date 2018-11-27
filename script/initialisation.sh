@@ -7,3 +7,5 @@ mkdir data
 fi
 cd script
 touch structure.txt
+cd ../data/
+ls > ../script/structure.txt
