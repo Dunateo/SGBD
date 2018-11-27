@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include "fichier.h"
+
+struct {
+  char *nom;
+  void (*fon)(char *);
+} table[] = {{"DELETE", deletee},{"UPDATE", update} };
 
 /**
 Notre fonction principale
@@ -14,7 +20,7 @@ int main(int argc, char const *argv[]) {
     affichageMenu();
     selectionMenu(&valMenu);
     executionSelect(valMenu);
-  }while (valMenu != 3);
+  }while (valMenu != 4);
 
 
   return 0;
@@ -27,11 +33,10 @@ void affichageMenu() {
   printf("#-----------------------------------------#\n");
   printf("#----------1---SELECTION------------------#\n");
   printf("#----------2---CREATE---------------------#\n");
-  printf("#----------3---QUIT-----------------------#\n");
+  printf("#----------3---COMMANDES------------------#\n");
+  printf("#----------4---QUIT-----------------------#\n");
   printf("#-----------------------------------------#\n");
 }
-
-
 
 /**
 Création des dépendances du programme
@@ -50,7 +55,7 @@ void selectionMenu(int *valMenu){
     printf("Merci de Sélectionner un Menu ?\n");
     scanf("%d",&val);
 
-  } while(val < 1 || val > 3); // deux seules valeurs que peut prendre le systeme
+  } while(val < 1 || val > 4);// deux seules valeurs que peut prendre le systeme
 
   *valMenu = val;
 }
@@ -65,8 +70,55 @@ void executionSelect(int valMenu){
 
     case 2:system("bash ./script/creationBDD.sh");
     break;
+
+    case 3:
+
+    gerePoint();
+    break;
+
   }
 }
+
+/**
+DELETE
+**/
+void deletee(char *param){
+  //delete la database
+  if(strcmp(param,"ALL") == 0){
+    rmdir("../data/remi/");
+    printf("suppresion\n" );
+  }
+}
+
+/**
+UPDATE
+**/
+void update(char *param){
+  printf("gg ca marche\n");
+
+}
+
+/**
+Gestion des pointeurs de fonctions
+**/
+void gerePoint(){
+  char nom[80];
+  char x[80];
+  unsigned int i;
+  for (;;) {
+    printf("commande>>" );
+    scanf("%s", nom);//fonction choisie
+    if (strcmp(nom, "fin")==0) break;
+    printf("paramètre>>");
+    scanf("%s", x);
+    //parcours du tableau de pointeurs de fonctions depart de la case À on avance tant que i ne deborde pas du tableau et que le afonction demandée ("nom") n'est pas éga au nom de la focntion dans table[i].nom.
+    for (i=0; i<NBF && strcmp(table[i].nom, nom) != 0; i++) ;
+    if (i < NBF)
+    (*table[i].fon)(x);
+    else printf("Commande inconnue\n");
+  }
+}
+
 /**
 Lecture du fichier de structure
 **/
@@ -76,6 +128,6 @@ void initialisationBDD(bdd *Base){
   f = fopen("../script/structure.txt","r");
   if(f == NULL)
 		printf("fichier non ouvert\n");
-  Base = malloc(sizeof(bdd)*)
+
 
 }

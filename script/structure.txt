@@ -2,10 +2,6 @@
 Bitcoins
 CIR2
 matthieulegrosfdp
-<<<<<<< HEAD
-web
-Web
-=======
 remi
 7
 Bitcoins/coins.txt
@@ -15,4 +11,3 @@ matthieulegrosfdp/cefdp.txt
 matthieulegrosfdp/pourquoijeledeteste.txt
 remi/assom.txt
 remi/jackie.txt
->>>>>>> 69d4a980ff19f0142175f62ecad9d925d379544d
