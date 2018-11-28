@@ -26,7 +26,7 @@ void selectPath(selection *select){
   //init
   char trans[10];
   char transd[10];
-  char cmd[40];
+  char cmd[60];
   char cmdtrans[30];
   char cmddeux[100];
   strcpy(select->BDD,"");
@@ -41,8 +41,9 @@ void selectPath(selection *select){
   //ajout des chemins
   snprintf(select->BDD, sizeof select->BDD, "./data/%s/", trans);
   snprintf(select->Table, sizeof select->Table, "./data/%s/", trans);
-  snprintf(cmd, sizeof cmd, "cd %s; ls", select->BDD);
+  snprintf(cmd, sizeof cmd, "cd %s; ls | cut -f1 -d'.'", select->BDD);
   //command system
+  printf("Affichage des tables:\n");
   system(cmd);
   //selection
   do {
@@ -54,7 +55,7 @@ void selectPath(selection *select){
   //path to table
   strcat(select->Table, transd);
   strcat(select->Table, ".txt");
-  printf("Voici votre sélection :%s\n",select->Table );
+  printf("SELECT:%s\n",select->Table );
 
 }
 

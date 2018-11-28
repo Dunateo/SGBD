@@ -1,7 +1,7 @@
-bdd: fichier.o main.o SQL.o initialisation.o
-	gcc -Wall -o bdd fichier.o main.o SQL.o initialisation.o
+SGBD: fichier.o main.o SQL.o initialisation.o split.o
+	gcc -Wall -o SGBD fichier.o main.o SQL.o initialisation.o split.o
 
-fichier.o: fichier.c fichier.h SQL.h
+fichier.o: fichier.c fichier.h SQL.h split.h
 	gcc -Wall -c fichier.c
 
 initialisation.o: initialisation.c initialisation.h
@@ -12,3 +12,6 @@ main.o: main.c fichier.h initialisation.h
 
 SQL.o: SQL.c SQL.h fichier.h
 	gcc -Wall -c SQL.c
+
+split.o: split.h split.c
+	gcc -Wall -c split.c

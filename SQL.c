@@ -3,11 +3,12 @@
 #include <string.h>
 #include "fichier.h"
 #include "SQL.h"
+#include "split.h"
 
 struct {
   char *nom;
   void (*fon)(char *, selection *);
-} table[] = {{"DELETE", deletee},{"UPDATE", update},{"HELP", help} };
+} table[] = {{"DELETE", deletee},{"UPDATE", update},{"HELP", help},{"INSERT", insert} };
 
 /**
 DELETE
@@ -35,8 +36,10 @@ void deletee(char *param, selection *trans){
     char cote;
     FILE * fprem;
     FILE * fdeux;
-    printf("Commence par?>>" );
+    printf("mot?>>" );
     scanf("%s", &cote );
+    printf("Suppresion de %c dans %s\n", cote, trans->Table );
+
     if ((fprem = fopen(trans->Table, "r")) == NULL)
         printf("exit\n" );
 
@@ -82,7 +85,28 @@ void update(char *param, selection *trans){
   }
 
 }
+/**
+INSERT
+**/
+void insert(char *param, selection *trans){
+  char ligne[50];
+  if(strcmp(param,"LIGNE") == 0){
+    FILE * f;
+    f=fopen(trans->Table,"a+");
+    if(f == NULL){
+      printf("Impossible d'ouvrir la table\n");
+    }
+    for (int i = 0; i < 4; i++) {
+      printf("param %d\n", i );
+      scanf("%s",ligne);
+      fprintf(f, "%s|",ligne);
+    }
 
+
+
+    fclose(f);
+  }
+}
 /**
 HELP
 **/
@@ -94,24 +118,21 @@ void help(char *param, selection *trans){
 Gestion des pointeurs de fonctions
 **/
 void gerePoint(selection *select){
-  char nom[80];
-  char x[80];
+  char **cmd;
+  char nom[100];
+  int nb;
   selection trans;
   trans = *select;
   unsigned int i;
   for (;;) {
     printf("commande>>" );
     scanf("%s", nom);//fonction choisie
-    if (strcmp(nom, "fin")==0) break;
-    printf("paramètre>>");
-    scanf("%s", x);
-    if(strcmp(x, "")==0){
-      strcpy(x,"rien");
-    }
+    fonct(nom, &cmd, &nb);
+    if (strcmp(nom, "END")==0) break;
     //parcours du tableau de pointeurs de fonctions depart de la case À on avance tant que i ne deborde pas du tableau et que le afonction demandée ("nom") n'est pas éga au nom de la focntion dans table[i].nom.
-    for (i=0; i<NBF && strcmp(table[i].nom, nom) != 0; i++) ;
+    for (i=0; i<NBF && strcmp(table[i].nom, cmd[0]) != 0; i++) ;
     if (i < NBF)
-    (*table[i].fon)(x,&trans);
+    (*table[i].fon)(cmd[1],&trans);
     else printf("Commande inconnue\n");
   }
 }

@@ -131,8 +131,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 		{
 			for(i = 0,k = 0;i < position[j]-1; i++,k++)
 			{
-				resultat[j][k] = chaine[i];main.o: main.c fichier.h
-	gcc -Wall -c main.c
+				resultat[j][k] = chaine[i];
 
 			}
 
@@ -192,9 +191,8 @@ void fonct(char *info, char ***R, int *nb)
 	int lg = 0,nbSep = 0,i,posit[50];
 
 	char **result;
-	char sep = ' ';
+	char sep = '.';
 
-	printf("\nSaisir une ligne :  \n");
 
 	if(info == NULL)
 	{
@@ -202,7 +200,7 @@ void fonct(char *info, char ***R, int *nb)
 	}
 	else if(Fill(info,sep) != 0)
 	{
-		printf("Chaine remplie de séparateurs\n");
+		//printf("Chaine remplie de séparateurs\n");
 	}
 	else if(info[0] != '\0' && info != NULL)
 	{
@@ -220,7 +218,7 @@ void fonct(char *info, char ***R, int *nb)
 		{
 			if((posit[nbSep] != longChaine(result[i])) && compChaine(result[i],"") != 0)
 			{
-				printf("Sous chaine %d = %s\n",i,result[i]);
+				//printf("Sous chaine %d = %s\n",i,result[i]);
 			}
 		}
 
