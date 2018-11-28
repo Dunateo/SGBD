@@ -11,18 +11,6 @@ struct {
 
 
 /**
-Affichage du Menu
-**/
-void affichageMenu() {
-  printf("#-----------------------------------------#\n");
-  printf("#----------1---SELECTION------------------#\n");
-  printf("#----------2---CREATE---------------------#\n");
-  printf("#----------3---COMMANDES------------------#\n");
-  printf("#----------4---QUIT-----------------------#\n");
-  printf("#-----------------------------------------#\n");
-}
-
-/**
 Création des dépendances du programme
 **/
 void intialisationData(){
@@ -43,15 +31,20 @@ void selectionMenu(int *valMenu){
 
   *valMenu = val;
 }
+
 /**
 Action selon le mode
 **/
 void executionSelect(int valMenu){
   int valCs = 0;
+
   switch (valMenu) {
+    //SELECTION
     case 1:system("bash ./script/affichageBDD.sh");
     break;
 
+
+    //CREATE
     case 2:
 
     printf("1----------BDD\n");
@@ -67,6 +60,7 @@ void executionSelect(int valMenu){
     }
     break;
 
+    //COMMANDES
     case 3:
 
     gerePoint();
@@ -93,29 +87,29 @@ void deletee(char *param){
 
   }
   else if(strcmp(param,"LIGNE") == 0){
-    char ligne[256]; //en partant du principe que chaque ligne ne fait pas plus de 246 charactères
+    char ligne[256]; //en partant du principe que chaque ligne ne fait pas plus de 256 charactères
     char cote;
-    FILE * fIn;
-    FILE * fOut;
+    FILE * fprem;
+    FILE * fdeux;
     printf("Commence par?>>" );
     scanf("%s", &cote );
-    if ((fIn = fopen("./data/remi/assom.txt", "r")) == NULL)
+    if ((fprem = fopen("./data/remi/assom.txt", "r")) == NULL)
         printf("exit\n" );
 
-    if ((fOut = fopen("./data/remi/assom.tmp", "w")) == NULL)
+    if ((fdeux = fopen("./data/remi/assom.tmp", "w")) == NULL)
     {
-        fclose(fIn);
+        fclose(fprem);
         printf("exit\n" );
     }
 
     while (fgets(ligne, sizeof ligne, fIn))
     {
         if (ligne[0] != cote)
-            fputs(ligne, fOut);
+            fputs(ligne, fdeux);
     }
 
-    fclose(fIn);
-    fclose(fOut);
+    fclose(fprem);
+    fclose(fdeux);
 
     rename("./data/remi/assom.tmp", "./data/remi/assom.txt");
     remove("./data/remi/assom.tmp");
