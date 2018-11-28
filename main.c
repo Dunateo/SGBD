@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fichier.h"
+#include "initialisation.h"
 
 /**
 Notre fonction principale

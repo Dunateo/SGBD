@@ -5,12 +5,12 @@
 int longChaine(char *chaine)
 {
 	int i = 0;
-	
+
 	while(chaine[i] != '\0')
 	{
 		i++;
 	}
-	
+
 	return i;
 }
 
@@ -18,19 +18,19 @@ int longChaine(char *chaine)
 void nbSeparation(char *chaine, int *nbSep, int position[50],char sep)
 {
 	int i = 0, j = 0;
-	
+
 	while(chaine[i] != '\0')
-	{	
+	{
 		if(chaine[i] == sep)
 		{
 			(*nbSep)++;
 			position[j] = i+1;
 			j++;
 		}
-		
+
 		i++;
 	}
-		
+
 	if(*nbSep == 0)
 	{
 		position[j] = longChaine(chaine)+1;
@@ -42,7 +42,7 @@ void nbSeparation(char *chaine, int *nbSep, int position[50],char sep)
 int compChaine(char *chaine1, char *chaine2)
 {
 	int verif = 0;
-	
+
 	if(longChaine(chaine1) == longChaine(chaine2))
 	{
 		for(int i = 0;i < longChaine(chaine1); i++)
@@ -61,7 +61,7 @@ int compChaine(char *chaine1, char *chaine2)
 	{
 		return -1;
 	}
-	
+
 	if( verif == longChaine(chaine1) && verif == longChaine(chaine2))
 	{
 		return 0;
@@ -76,25 +76,25 @@ int compChaine(char *chaine1, char *chaine2)
 void copieChaine(char *dest, char *src)
 {
 	int i;
-	
+
 	for(i = 0;src[i] != '\0'; ++i)
 	{
 		dest[i] = src[i];
 	}
-	
+
 	dest[i] = '\0';
 }
 
 
 void chaine(char *chaine, int *lgChaine, int *nbSep, int position[50], char sep)
-{	
+{
 	if(*nbSep != 0)
 	{
 		*nbSep = 0;
 	}
-	
+
 	*lgChaine = longChaine(chaine);
-	
+
 	nbSeparation(chaine,nbSep,position,sep);
 }
 
@@ -102,7 +102,7 @@ void chaine(char *chaine, int *lgChaine, int *nbSep, int position[50], char sep)
 void initResult(int *lgChaine, char ***resultat, int position[50], int *nbSep)
 {
 	(*resultat) = (char **)malloc(sizeof(char *)*(*nbSep + 1));
-	
+
 	for(int j = 0;j <= *nbSep; j++)
 	{
 		if(j == 0)
@@ -124,16 +124,18 @@ void initResult(int *lgChaine, char ***resultat, int position[50], int *nbSep)
 void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], int *nbSep)
 {
 	int i,j,k;
-	
+
 	for(j = 0;j <= *nbSep; j++)
 	{
 		if(j == 0 && position[j] != 1)
 		{
 			for(i = 0,k = 0;i < position[j]-1; i++,k++)
 			{
-				resultat[j][k] = chaine[i];
+				resultat[j][k] = chaine[i];main.o: main.c fichier.h
+	gcc -Wall -c main.c
+
 			}
-			
+
 			resultat[j][k+1] = '\0';
 		}
 		else if(j < *nbSep && j != 0)
@@ -142,7 +144,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 			{
 				resultat[j][k] = chaine[i];
 			}
-			
+
 			resultat[j][k+1] = '\0';
 		}
 		else if(j == *nbSep)
@@ -151,7 +153,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 			{
 				resultat[j][k] = chaine[i];
 			}
-			
+
 			resultat[j][k+1] = '\0';
 		}
 	}
@@ -161,7 +163,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 int Fill(char *chaine, char sep)
 {
 	int i,empty = 0;
-	
+
 	for(i = 0;i < longChaine(chaine); i++)
 	{
 		if(chaine[i] == sep)
@@ -173,7 +175,7 @@ int Fill(char *chaine, char sep)
 			break;
 		}
 	}
-	
+
 	if(empty == longChaine(chaine) && empty != 0)
 	{
 		return -1;
@@ -188,12 +190,12 @@ int Fill(char *chaine, char sep)
 void fonct(char *info, char ***R, int *nb)
 {
 	int lg = 0,nbSep = 0,i,posit[50];
-	
+
 	char **result;
 	char sep = ' ';
-	
+
 	printf("\nSaisir une ligne :  \n");
-		
+
 	if(info == NULL)
 	{
 		printf("Chaine nulle\n");
@@ -205,15 +207,15 @@ void fonct(char *info, char ***R, int *nb)
 	else if(info[0] != '\0' && info != NULL)
 	{
 		// SEPARATION SOUS CHAINE
-		
+
 		chaine(info,&lg,&nbSep,posit,sep);
-			
+
 		initResult(&lg,&result,posit,&nbSep);
-		
+
 		sousChaine(info,&lg,result,posit,&nbSep);
-		
+
 		// AFFICHAGE SOUS CHAINE
-		
+
 		for(i = 0;i <= nbSep; i++)
 		{
 			if((posit[nbSep] != longChaine(result[i])) && compChaine(result[i],"") != 0)
@@ -221,7 +223,7 @@ void fonct(char *info, char ***R, int *nb)
 				printf("Sous chaine %d = %s\n",i,result[i]);
 			}
 		}
-		
+
 		*R = result;
 		*nb = nbSep;
 	}

@@ -1,0 +1,2 @@
+void affichageMenu();
+void intialisationData();

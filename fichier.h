@@ -11,12 +11,6 @@ typedef struct selection{
   char Table[80];
 }selection;
 
-void affichageMenu();
 void selectPath(selection *select);
-void intialisationData();
 void selectionMenu(int *valMenu);
 void executionSelect(int valMenu, selection *select);
-void gerePoint(selection *select);
-void deletee(char *param, selection *trans);
-void update(char *param, selection *trans);
-void help(char *param, selection *trans);
