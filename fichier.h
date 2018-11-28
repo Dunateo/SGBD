@@ -8,7 +8,7 @@ typedef struct bdd{
 }bdd;
 typedef struct selection{
   char BDD[30];
-  char Table[40];
+  char Table[80];
 }selection;
 
 void affichageMenu();
@@ -19,3 +19,4 @@ void executionSelect(int valMenu, selection *select);
 void gerePoint(selection *select);
 void deletee(char *param, selection *trans);
 void update(char *param, selection *trans);
+void help(char *param, selection *trans);

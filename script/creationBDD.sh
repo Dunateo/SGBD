@@ -38,7 +38,7 @@ else
 				echo "#----------3---FLOAT----------------------#"
 				echo "#----------4---PRIMARY KEY----------------#"
 				echo "#-----------------------------------------#"
-				echo -n "$typeelem|">> $deuxnom.txt
+				echo -n "$typeelem.">> $deuxnom.txt
 				echo "Nom élements:"
 				read nomelem
 				echo -n "$nomelem|">> $deuxnom.txt

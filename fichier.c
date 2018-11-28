@@ -6,7 +6,7 @@
 struct {
   char *nom;
   void (*fon)(char *, selection *);
-} table[] = {{"DELETE", deletee},{"UPDATE", update} };
+} table[] = {{"DELETE", deletee},{"UPDATE", update},{"HELP", help} };
 
 
 
@@ -45,39 +45,35 @@ void selectionMenu(int *valMenu){
 Selection du directory
 **/
 void selectPath(selection *select){
+  //init
   char trans[10];
   char transd[10];
-  char cmd[30];
+  char cmd[40];
   char cmdtrans[30];
-  char cmddeux[30];
-  //init
-  strcpy(select->BDD,"./data/");
-  strcpy(select->Table,"./data/");
-  strcpy(cmd, "cd ");
+  char cmddeux[100];
+  strcpy(select->BDD,"");
+  strcpy(select->Table,"");
   //selection
   do {
     printf("Le nom de la sélection ?\n");
     scanf("%s", trans);
-    snprintf(cmdtrans, sizeof cmdtrans, "cd ./data/%s/ ", trans);
+    snprintf(cmdtrans, sizeof cmdtrans, "cd ./data/%s/", trans);
   } while(system(cmdtrans) != 0);
 
   //ajout des chemins
-  strcat(select->BDD, trans);
-  strcat(select->BDD, "/");
-  strcat(select->Table, trans);
-  strcat(cmd,select->BDD );
-  strcat(cmd,"; ls" );
+  snprintf(select->BDD, sizeof select->BDD, "./data/%s/", trans);
+  snprintf(select->Table, sizeof select->Table, "./data/%s/", trans);
+  snprintf(cmd, sizeof cmd, "cd %s; ls", select->BDD);
   //command system
   system(cmd);
   //selection
   do {
     printf("Le nom de la Table?\n");
     scanf("%s", transd);
-      snprintf(cmddeux, sizeof cmddeux, "./data/%s/%s.txt", trans,transd);
+    snprintf(cmddeux, sizeof cmddeux, "%s%s.txt",select->BDD ,transd);
   } while(fopen(cmddeux, "r") == NULL);
 
   //path to table
-  strcat(select->Table, "/");
   strcat(select->Table, transd);
   strcat(select->Table, ".txt");
   printf("Voici votre sélection :%s\n",select->Table );
@@ -115,7 +111,14 @@ void executionSelect(int valMenu, selection *select){
 
     //COMMANDES
     case 3:
-    gerePoint(select);
+    //on vérifie si l'ultilisateur à sélectionné un directory
+      if(strcmp(select->BDD,"") == 0){
+        printf("IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD\n");
+      }
+      else{
+        gerePoint(select);
+      }
+
     break;
 
   }
@@ -125,7 +128,7 @@ void executionSelect(int valMenu, selection *select){
 DELETE
 **/
 void deletee(char *param, selection *trans){
-  char cmd[100];
+  char cmd[200];
   //delete la database
   if(strcmp(param,"ALL") == 0){
     snprintf(cmd, sizeof cmd, "rm -rf %s", trans->BDD);
@@ -137,7 +140,7 @@ void deletee(char *param, selection *trans){
 
     snprintf(cmd, sizeof cmd, "rm %s", trans->Table);
     system(cmd);
-    printf("suppresion Table\n" );
+    printf("suppresion %s\n", trans->Table);
 
   }
   //delete ligne
@@ -176,8 +179,30 @@ void deletee(char *param, selection *trans){
 UPDATE
 **/
 void update(char *param, selection *trans){
-  printf("gg ca marche\n");
 
+  char cmd[200];
+  char mot[30];
+  char new[30];
+
+  if(strcmp(param,"ALL") == 0){
+
+            snprintf(cmd, sizeof cmd, "cat %s",trans->Table);
+            system(cmd);
+            printf("Modifier?>>");
+            scanf("%s",mot);
+            printf("NewMot?>>");
+            scanf("%s",new);
+            snprintf(cmd, sizeof cmd, "sed -i -e 's/%s/%s/g' %s",mot,new,trans->Table);
+            system(cmd);
+  }
+
+}
+
+/**
+HELP
+**/
+void help(char *param, selection *trans){
+  system("bash ./script/help.sh");
 }
 
 /**
@@ -195,6 +220,9 @@ void gerePoint(selection *select){
     if (strcmp(nom, "fin")==0) break;
     printf("paramètre>>");
     scanf("%s", x);
+    if(strcmp(x, "")==0){
+      strcpy(x,"rien");
+    }
     //parcours du tableau de pointeurs de fonctions depart de la case À on avance tant que i ne deborde pas du tableau et que le afonction demandée ("nom") n'est pas éga au nom de la focntion dans table[i].nom.
     for (i=0; i<NBF && strcmp(table[i].nom, nom) != 0; i++) ;
     if (i < NBF)
