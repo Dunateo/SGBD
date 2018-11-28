@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
 #include "fichier.h"
 
@@ -63,12 +62,24 @@ void selectionMenu(int *valMenu){
 Action selon le mode
 **/
 void executionSelect(int valMenu){
-
+  int valCs = 0;
   switch (valMenu) {
     case 1:system("bash ./script/affichageBDD.sh");
     break;
 
-    case 2:system("bash ./script/creationBDD.sh");
+    case 2:
+
+    printf("1----------BDD\n");
+    printf("2----------TABLE\n");
+    scanf("%d",&valCs);
+    if(valCs == 1){
+      system("bash ./script/creationBDD.sh");
+      valCs = 0;
+    }
+    else if(valCs == 2){
+      system("bash ./script/creationTable.sh");
+      valCs = 0;
+    }
     break;
 
     case 3:
@@ -83,10 +94,46 @@ void executionSelect(int valMenu){
 DELETE
 **/
 void deletee(char *param){
+
   //delete la database
   if(strcmp(param,"ALL") == 0){
-    rmdir("../data/remi/");
+    system("rm -rf ./data/Bitcoins/");
     printf("suppresion\n" );
+  }
+  else if(strcmp(param,"TABLE") == 0){
+    char table[80];
+    printf("Table name ?>>" );
+    scanf("%s",table);
+    remove(table);
+
+  }
+  else if(strcmp(param,"LIGNE") == 0){
+    char ligne[256]; //en partant du principe que chaque ligne ne fait pas plus de 246 charactères
+    char cote;
+    FILE * fIn;
+    FILE * fOut;
+    printf("Commence par?>>" );
+    scanf("%s", &cote );
+    if ((fIn = fopen("./data/remi/assom.txt", "r")) == NULL)
+        printf("exit\n" );
+
+    if ((fOut = fopen("./data/remi/assom.tmp", "w")) == NULL)
+    {
+        fclose(fIn);
+        printf("exit\n" );
+    }
+
+    while (fgets(ligne, sizeof ligne, fIn))
+    {
+        if (ligne[0] != cote)
+            fputs(ligne, fOut);
+    }
+
+    fclose(fIn);
+    fclose(fOut);
+
+    rename("./data/remi/assom.tmp", "./data/remi/assom.txt");
+    remove("./data/remi/assom.tmp");
   }
 }
 

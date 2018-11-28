@@ -1,11 +1,9 @@
 #!/bin/bash
 cd data
-echo "Création d'une BDD rentrer le nom:"
+ls
+echo "Ajout d'une table le nom de la BDD ?:"
 read nom
 if [ -d $nom ];then
-  echo "La BDD existe déja";
-else
-  mkdir $nom
   cd $nom
   echo "Combien de tables ?:"
   read nb
@@ -46,10 +44,11 @@ else
 		done
 
   done
-  echo "Hop ta BDD est crée $nom"
+  echo "Hop ta table est crée dans $nom"
+else
+  echo "BDD N'EXISTE PAS LO"
 
 fi
-
 cd ..
 ls -1 | wc -l> ../script/structure.txt
 ls >> ../script/structure.txt
