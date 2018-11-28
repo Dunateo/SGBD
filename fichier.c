@@ -8,22 +8,7 @@ struct {
   void (*fon)(char *);
 } table[] = {{"DELETE", deletee},{"UPDATE", update} };
 
-/**
-Notre fonction principale
-**/
-int main(int argc, char const *argv[]) {
-  int valMenu = 0;
 
-  intialisationData();
-  do{
-    affichageMenu();
-    selectionMenu(&valMenu);
-    executionSelect(valMenu);
-  }while (valMenu != 4);
-
-
-  return 0;
-}
 
 /**
 Affichage du Menu
