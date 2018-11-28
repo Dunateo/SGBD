@@ -5,10 +5,19 @@
 
 struct {
   char *nom;
-  void (*fon)(char *);
+  void (*fon)(char *, selection *);
 } table[] = {{"DELETE", deletee},{"UPDATE", update} };
 
 
+
+void affichageMenu() {
+  printf("#-----------------------------------------#\n");
+  printf("#----------1---SELECTION------------------#\n");
+  printf("#----------2---CREATE---------------------#\n");
+  printf("#----------3---COMMANDES------------------#\n");
+  printf("#----------4---QUIT-----------------------#\n");
+  printf("#-----------------------------------------#\n");
+}
 
 /**
 Création des dépendances du programme
@@ -33,14 +42,58 @@ void selectionMenu(int *valMenu){
 }
 
 /**
+Selection du directory
+**/
+void selectPath(selection *select){
+  char trans[10];
+  char transd[10];
+  char cmd[30];
+  char cmdtrans[30];
+  char cmddeux[30];
+  //init
+  strcpy(select->BDD,"./data/");
+  strcpy(select->Table,"./data/");
+  strcpy(cmd, "cd ");
+  //selection
+  do {
+    printf("Le nom de la sélection ?\n");
+    scanf("%s", trans);
+    snprintf(cmdtrans, sizeof cmdtrans, "cd ./data/%s/ ", trans);
+  } while(system(cmdtrans) != 0);
+
+  //ajout des chemins
+  strcat(select->BDD, trans);
+  strcat(select->BDD, "/");
+  strcat(select->Table, trans);
+  strcat(cmd,select->BDD );
+  strcat(cmd,"; ls" );
+  //command system
+  system(cmd);
+  //selection
+  do {
+    printf("Le nom de la Table?\n");
+    scanf("%s", transd);
+      snprintf(cmddeux, sizeof cmddeux, "./data/%s/%s.txt", trans,transd);
+  } while(fopen(cmddeux, "r") == NULL);
+
+  //path to table
+  strcat(select->Table, "/");
+  strcat(select->Table, transd);
+  strcat(select->Table, ".txt");
+  printf("Voici votre sélection :%s\n",select->Table );
+
+}
+
+/**
 Action selon le mode
 **/
-void executionSelect(int valMenu){
+void executionSelect(int valMenu, selection *select){
   int valCs = 0;
 
   switch (valMenu) {
     //SELECTION
     case 1:system("bash ./script/affichageBDD.sh");
+      selectPath(select);
     break;
 
 
@@ -62,8 +115,7 @@ void executionSelect(int valMenu){
 
     //COMMANDES
     case 3:
-
-    gerePoint();
+    gerePoint(select);
     break;
 
   }
@@ -72,37 +124,41 @@ void executionSelect(int valMenu){
 /**
 DELETE
 **/
-void deletee(char *param){
-
+void deletee(char *param, selection *trans){
+  char cmd[100];
   //delete la database
   if(strcmp(param,"ALL") == 0){
-    system("rm -rf ./data/Bitcoins/");
-    printf("suppresion\n" );
+    snprintf(cmd, sizeof cmd, "rm -rf %s", trans->BDD);
+    system(cmd);
+    printf("suppresion BDD\n" );
   }
+  //delete table
   else if(strcmp(param,"TABLE") == 0){
-    char table[80];
-    printf("Table name ?>>" );
-    scanf("%s",table);
-    remove(table);
+
+    snprintf(cmd, sizeof cmd, "rm %s", trans->Table);
+    system(cmd);
+    printf("suppresion Table\n" );
 
   }
+  //delete ligne
   else if(strcmp(param,"LIGNE") == 0){
     char ligne[256]; //en partant du principe que chaque ligne ne fait pas plus de 256 charactères
+    snprintf(cmd, sizeof cmd, "%s.tmp", trans->Table);
     char cote;
     FILE * fprem;
     FILE * fdeux;
     printf("Commence par?>>" );
     scanf("%s", &cote );
-    if ((fprem = fopen("./data/remi/assom.txt", "r")) == NULL)
+    if ((fprem = fopen(trans->Table, "r")) == NULL)
         printf("exit\n" );
 
-    if ((fdeux = fopen("./data/remi/assom.tmp", "w")) == NULL)
+    if ((fdeux = fopen(cmd, "w")) == NULL)
     {
         fclose(fprem);
         printf("exit\n" );
     }
 
-    while (fgets(ligne, sizeof ligne, fIn))
+    while (fgets(ligne, sizeof ligne, fprem))
     {
         if (ligne[0] != cote)
             fputs(ligne, fdeux);
@@ -111,15 +167,15 @@ void deletee(char *param){
     fclose(fprem);
     fclose(fdeux);
 
-    rename("./data/remi/assom.tmp", "./data/remi/assom.txt");
-    remove("./data/remi/assom.tmp");
+    rename(cmd, trans->Table);
+    remove(cmd);
   }
 }
 
 /**
 UPDATE
 **/
-void update(char *param){
+void update(char *param, selection *trans){
   printf("gg ca marche\n");
 
 }
@@ -127,9 +183,11 @@ void update(char *param){
 /**
 Gestion des pointeurs de fonctions
 **/
-void gerePoint(){
+void gerePoint(selection *select){
   char nom[80];
   char x[80];
+  selection trans;
+  trans = *select;
   unsigned int i;
   for (;;) {
     printf("commande>>" );
@@ -140,7 +198,7 @@ void gerePoint(){
     //parcours du tableau de pointeurs de fonctions depart de la case À on avance tant que i ne deborde pas du tableau et que le afonction demandée ("nom") n'est pas éga au nom de la focntion dans table[i].nom.
     for (i=0; i<NBF && strcmp(table[i].nom, nom) != 0; i++) ;
     if (i < NBF)
-    (*table[i].fon)(x);
+    (*table[i].fon)(x,&trans);
     else printf("Commande inconnue\n");
   }
 }
