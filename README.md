@@ -28,7 +28,8 @@ form of the order: COMMAND.PARAMETER
   * LIGNE 
 * UPDATE 
   * ALL 
-  
+* HELP
+
 ## **Architecture**
-![Logo](/images/archit.png)
-Format: ![Architecture of database](url)
+![Architecture of database](/images/archit.png)
+
