@@ -1,6 +1,8 @@
-# SGBD
-This project is our december C project , the subject was "Made an SGBD in C". 
+# SGBD By Valentin Bru and Mael Bouchand
+This project is our CIR 2 december C project , the subject was "Made an DBMS in C".
+The deadline was very short two weeks (not focused on because we still had lessons)
 Database management system
+A database is an organized collection of data, generally stored and accessed electronically from a computer system.
 
 ## **Specifications**
 
