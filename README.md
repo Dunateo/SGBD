@@ -18,7 +18,7 @@ In order to implement a maximum of functions in a good looking programs we estab
 
 ## **SQL Commands**
 
-form of the order: COMMAND.PARAMETER
+form of the order: COMMAND.PARAMETER dont forget the . 
 
 * INSERT 
   * LIGNE 
@@ -33,3 +33,14 @@ form of the order: COMMAND.PARAMETER
 ## **Architecture**
 ![Architecture of database](/images/archit.png)
 
+## **MENU**
+
+* SELECTION 1 
+  * In order to SELECT a database and a table
+* CREATE 2
+  * Create a new database
+  * Adding a new table to an old database
+* COMMAND 3
+  * The SQL interpreter
+* EXIT 4
+  * Quit the software
