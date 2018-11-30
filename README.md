@@ -9,13 +9,26 @@ Database management system
 
 In order to implement a maximum of functions in a good looking programs we establish specifications.
 
-## **Adding**
+## **Adding by us**
 
 - [x] SQL command interpreter
 - [x] Creating database
 - [x] Menu
 - [ ] file command to execute many queries 
 
+## **SQL Commands**
+
+form of the order: COMMAND.PARAMETER
+
+* INSERT 
+  * LIGNE 
+* DELETE 
+  * ALL 
+  * TABLE 
+  * LIGNE 
+* UPDATE 
+  * ALL 
+  
 ## **Architecture**
 ![Logo](/images/archit.png)
 Format: ![Architecture of database](url)
