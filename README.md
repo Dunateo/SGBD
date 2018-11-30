@@ -13,4 +13,4 @@ adding:
 -SQL command interpreter 
 -Creating database
 -Menu
--
+-file command to execute many queries 
