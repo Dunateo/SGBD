@@ -1,5 +1,5 @@
 # SGBD By Valentin Bru and Mael Bouchand
-This project is our CIR 2 december C project , the subject was "Made an DBMS in C".
+This project is our CIR 2 december C project , the subject was "Made a DBMS in C".
 The deadline was very short two weeks (not focused on because we still had lessons)
 Database management system
 A database is an organized collection of data, generally stored and accessed electronically from a computer system.
@@ -9,7 +9,7 @@ A database is an organized collection of data, generally stored and accessed ele
 - [x] Stock and recover the data "persistence"
 - [x] fixing some goals reachable in two weeks 
 
-In order to implement a maximum of functions in a good looking programs we establish specifications.
+In order to implement a maximum of functions in a good looking program we establish specifications.
 
 ## **Adding by us**
 
