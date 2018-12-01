@@ -31,6 +31,7 @@ form of the order: COMMAND.PARAMETER dont forget the .
 * UPDATE 
   * ALL 
 * HELP
+* END
 
 ## **Architecture**
 ![Architecture of database](/images/archit.png)
@@ -47,3 +48,13 @@ form of the order: COMMAND.PARAMETER dont forget the .
   * The SQL interpreter
 * EXIT 4
   * Quit the software
+  
+  ## **Use Scenario**
+  
+  - Launch the software ./SGBD
+  - Create a database by chosing 2
+  - Select a database with the 1 menu
+  - And type all your commands in the SQL Interpreter 3
+  - Type END to go back on the main menu
+  - 4 exit the software
+  
