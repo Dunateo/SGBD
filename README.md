@@ -34,6 +34,7 @@ form of the order: COMMAND.PARAMETER dont forget the .
 
 ## **Architecture**
 ![Architecture of database](/images/archit.png)
+![Architecture of tables](/images/tables.png)
 
 ## **MENU**
 
