@@ -16,6 +16,7 @@ In order to implement a maximum of functions in a good looking program we establ
 - [x] SQL command interpreter
 - [x] Creating database
 - [x] Menu
+- [ ] Stock the database architecture in a C structure to simplify specific queries
 - [ ] file command to execute many queries 
 
 ## **SQL Commands**
