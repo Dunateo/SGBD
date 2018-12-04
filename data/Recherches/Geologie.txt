@@ -1,0 +1,3 @@
+4.id_geologie|1.nbroches|2.nom_roches|
+
+1|450|Granite|

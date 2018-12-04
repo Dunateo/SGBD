@@ -8,7 +8,7 @@
 struct {
   char *nom;
   void (*fon)(char *, selection *);
-} table[] = {{"DELETE", deletee},{"UPDATE", update},{"HELP", help},{"INSERT", insert} };
+} table[] = {{"DELETE", deletee},{"UPDATE", update},{"HELP", help},{"INSERT", insert},{"SELECT", selectt} };
 
 /**
 DELETE
@@ -96,7 +96,8 @@ void insert(char *param, selection *trans){
     if(f == NULL){
       printf("Impossible d'ouvrir la table\n");
     }
-    for (int i = 0; i < 4; i++) {
+    fprintf(f, "\n");
+    for (int i = 0; i < 3; i++) {
       printf("param %d\n", i );
       scanf("%s",ligne);
       fprintf(f, "%s|",ligne);
@@ -113,6 +114,30 @@ HELP
 void help(char *param, selection *trans){
   system("bash ./script/help.sh");
 }
+
+/**
+SELECT
+**/
+void selectt(char *param, selection *trans){
+  char cmd[100];
+  
+  //Afficher la bdd déja présélectionné
+  if(strcmp(param,"*") == 0){
+    snprintf(cmd, sizeof cmd, "ls %s",trans->BDD);
+    system(cmd);
+    snprintf(cmd, sizeof cmd, "cat -s %s%s ",trans->BDD,"*.txt");
+    system(cmd);
+    printf("\n");
+
+  }
+  //Affiche la table déja préselectionné
+  if(strcmp(param,"TABLE") == 0){
+      snprintf(cmd, sizeof cmd, "cat -s %s",trans->Table);
+      system(cmd);
+      printf("\n");
+  }
+}
+
 
 /**
 Gestion des pointeurs de fonctions

@@ -34,6 +34,7 @@ void selectPath(selection *select){
   //selection
   do {
     printf("Le nom de la sélection ?\n");
+    printf(">>");
     scanf("%s", trans);
     snprintf(cmdtrans, sizeof cmdtrans, "cd ./data/%s/", trans);
   } while(system(cmdtrans) != 0);
@@ -48,6 +49,7 @@ void selectPath(selection *select){
   //selection
   do {
     printf("Le nom de la Table?\n");
+    printf(">>");
     scanf("%s", transd);
     snprintf(cmddeux, sizeof cmddeux, "%s%s.txt",select->BDD ,transd);
   } while(fopen(cmddeux, "r") == NULL);

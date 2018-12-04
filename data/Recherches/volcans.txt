@@ -1,0 +1,7 @@
+4.id_volcan|1.densite_lave|2.nom_volcan|
+1|30|Python_de_la_fournaise|
+2|80|Kilimanjaro|
+
+3|45|Etna|
+4|12|Vesuve|
+5|9|Kilauea|
