@@ -30,7 +30,7 @@ form of the order: COMMAND.PARAMETER dont forget the .
   * TABLE 
   * LIGNE 
 * SELECT
-  * "*"
+  * *
   * TABLE
 * UPDATE 
   * ALL 
