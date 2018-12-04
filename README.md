@@ -29,6 +29,9 @@ form of the order: COMMAND.PARAMETER dont forget the .
   * ALL 
   * TABLE 
   * LIGNE 
+* SELECT
+  * "*"
+  * TABLE
 * UPDATE 
   * ALL 
 * HELP
