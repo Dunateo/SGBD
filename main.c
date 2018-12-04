@@ -9,7 +9,9 @@ Notre fonction principale
 int main(int argc, char const *argv[]) {
   int valMenu = 0;
   selection select;
+  BDD Base;
   intialisationData();
+  initialisationBDD(&Base);
   do{
     affichageMenu();
     selectionMenu(&valMenu);

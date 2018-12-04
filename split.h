@@ -6,4 +6,6 @@ void chaine(char *chaine, int *lgChaine, int *nbSep, int position[10], char sep)
 void initResult(int *lgChaine, char ***resultat, int position[10], int *nbSep); // Initialise une variable résultat qui contiendra les différentes sous chaine
 void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[10], int *nbSep); // Divise la chaine principale en sous chaine
 int Fill(char *chaine, char sep); // Vérifie la composition de la chaine  : -1 si que des séparateurs et 0 autre
-void fonct(char *info, char ***R, int *nb); // 
+void fonct(char *info, char ***R, int *nb); //
+void fonctFich(char *info, char ***R, int *nb);
+void fonctTable(char *info, char ***R, int *nb);
