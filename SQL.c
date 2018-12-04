@@ -19,7 +19,7 @@ void deletee(char *param, selection *trans){
   if(strcmp(param,"ALL") == 0){
     snprintf(cmd, sizeof cmd, "rm -rf %s", trans->BDD);
     system(cmd);
-    printf("suppresion BDD\n" );
+    printf("suppresion %s\n", trans->BDD );
   }
   //delete table
   else if(strcmp(param,"TABLE") == 0){
@@ -120,7 +120,7 @@ SELECT
 **/
 void selectt(char *param, selection *trans){
   char cmd[100];
-  
+
   //Afficher la bdd déja présélectionné
   if(strcmp(param,"*") == 0){
     snprintf(cmd, sizeof cmd, "ls %s",trans->BDD);
