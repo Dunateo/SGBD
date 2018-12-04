@@ -252,10 +252,4 @@ void initialisationBDD(BDD *Base){
     fclose(g);
   }
 
-
-
-
-
-
-
 }
