@@ -1,6 +1,6 @@
-void gerePoint(selection *select);
-void deletee(char *param, selection *trans);
-void update(char *param, selection *trans);
-void insert(char *param, selection *trans);
-void help(char *param, selection *trans);
-void selectt(char *param, selection *trans);
+void gerePoint(BDD *select);
+void deletee(char *param, BDD *trans);
+void update(char *param, BDD *trans);
+void insert(char *param, BDD *trans);
+void helpp(char *param, BDD *trans);
+void selectt(char *param, BDD *trans);

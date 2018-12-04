@@ -8,16 +8,19 @@ Notre fonction principale
 **/
 int main(int argc, char const *argv[]) {
   int valMenu = 0;
-  selection select;
   BDD Base;
   intialisationData();
-  initialisationBDD(&Base);
+
   do{
     affichageMenu();
     selectionMenu(&valMenu);
-    executionSelect(valMenu, &select);
+    executionSelect(valMenu, &Base);
   }while (valMenu != 4);
-
+  //vide la mémoire
+  free(Base.nomBDD);
+  free(Base.cheminBDD);
+  free(Base.cheminTable);
+  free(Base.Table);
 
   return 0;
 }

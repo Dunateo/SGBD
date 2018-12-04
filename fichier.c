@@ -5,10 +5,6 @@
 #include "SQL.h"
 #include "split.h"
 
-
-
-
-
 /**
 Selection du mode
 **/
@@ -83,7 +79,7 @@ void selectFich(selection *select){
 
   //ajout des chemins
   snprintf(select->BDD, sizeof select->BDD, "%s", trans);
-  snprintf(cmd, sizeof cmd, "cd ./data/%s/; ls", select->BDD);
+  snprintf(cmd, sizeof cmd, "cd ./data/%s/; ls|cut -f1 -d'.'", select->BDD);
   //command system
   system(cmd);
   //selection
@@ -102,13 +98,13 @@ void selectFich(selection *select){
 /**
 Action selon le mode
 **/
-void executionSelect(int valMenu, selection *select){
+void executionSelect(int valMenu, BDD *select){
   int valCs = 0;
 
   switch (valMenu) {
     //SELECTION
     case 1:system("bash ./script/affichageBDD.sh");
-      selectPath(select);
+        initialisationBDD(select);
     break;
 
 
@@ -131,7 +127,7 @@ void executionSelect(int valMenu, selection *select){
     //COMMANDES
     case 3:
     //on vérifie si l'ultilisateur à sélectionné un directory
-      if(strcmp(select->BDD,"") == 0){
+      if(strcmp(select->nomBDD,"") == 0){
         printf("IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD\n");
       }
       else{
@@ -208,9 +204,7 @@ void initialisationBDD(BDD *Base){
         strcpy(  Base->Table[cpt2-1].nomTable,Fichiertrans2[0] );
       }
     }
-    for (int i = 0; i < compteur; i++) {
-      printf("%s\n",Base->Table[i].nomTable );
-    }
+
   fclose(f);
 
 //assignation élements
@@ -219,7 +213,6 @@ void initialisationBDD(BDD *Base){
     //chaque tour de boucle pour chaque table
 
     snprintf(cmd, sizeof cmd, "%s%s.txt",Base->cheminBDD ,Base->Table[h].nomTable);
-    printf("%s\n",Base->Table[h].nomTable );
     g = fopen(cmd,"r");
     if(g == NULL){
       printf("problèmes dépendances \n" );
@@ -241,13 +234,11 @@ void initialisationBDD(BDD *Base){
       //le nom de chaque élements
       strcpy(Base->Table[h].nomElement[l].nom,FichierTable[1]);
 
-      printf("nom elem %s\n",Base->Table[h].nomElement[l].nom);
 
-      printf("type eleme %d\n",Base->Table[h].TypeElement[l]);
 
 
     }
-    printf("nb elem %d\n",Base->Table[h].nbElement);
+
 
     fclose(g);
   }
