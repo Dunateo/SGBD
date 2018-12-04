@@ -230,3 +230,93 @@ void fonct(char *info, char ***R, int *nb)
 		printf("Chaine vide\n");
 	}
 }
+
+void fonctFich(char *info, char ***R, int *nb)
+{
+	int lg = 0,nbSep = 0,i,posit[50];
+
+	char **result;
+	char sep = '/';
+
+
+	if(info == NULL)
+	{
+		printf("Chaine nulle\n");
+	}
+	else if(Fill(info,sep) != 0)
+	{
+		//printf("Chaine remplie de séparateurs\n");
+	}
+	else if(info[0] != '\0' && info != NULL)
+	{
+		// SEPARATION SOUS CHAINE
+
+		chaine(info,&lg,&nbSep,posit,sep);
+
+		initResult(&lg,&result,posit,&nbSep);
+
+		sousChaine(info,&lg,result,posit,&nbSep);
+
+		// AFFICHAGE SOUS CHAINE
+
+		for(i = 0;i <= nbSep; i++)
+		{
+			if((posit[nbSep] != longChaine(result[i])) && compChaine(result[i],"") != 0)
+			{
+				//printf("Sous chaine %d = %s\n",i,result[i]);
+			}
+		}
+
+		*R = result;
+		*nb = nbSep;
+	}
+	else
+	{
+		printf("Chaine vide\n");
+	}
+}
+
+void fonctTable(char *info, char ***R, int *nb)
+{
+	int lg = 0,nbSep = 0,i,posit[50];
+
+	char **result;
+	char sep = '|';
+
+
+	if(info == NULL)
+	{
+		printf("Chaine nulle\n");
+	}
+	else if(Fill(info,sep) != 0)
+	{
+		//printf("Chaine remplie de séparateurs\n");
+	}
+	else if(info[0] != '\0' && info != NULL)
+	{
+		// SEPARATION SOUS CHAINE
+
+		chaine(info,&lg,&nbSep,posit,sep);
+
+		initResult(&lg,&result,posit,&nbSep);
+
+		sousChaine(info,&lg,result,posit,&nbSep);
+
+		// AFFICHAGE SOUS CHAINE
+
+		for(i = 0;i <= nbSep; i++)
+		{
+			if((posit[nbSep] != longChaine(result[i])) && compChaine(result[i],"") != 0)
+			{
+				//printf("Sous chaine %d = %s\n",i,result[i]);
+			}
+		}
+
+		*R = result;
+		*nb = nbSep;
+	}
+	else
+	{
+		printf("Chaine vide\n");
+	}
+}
