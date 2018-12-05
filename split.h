@@ -9,3 +9,4 @@ int Fill(char *chaine, char sep); // Vérifie la composition de la chaine  : -1 
 void fonct(char *info, char ***R, int *nb); //
 void fonctFich(char *info, char ***R, int *nb);
 void fonctTable(char *info, char ***R, int *nb);
+void fonctEspace(char *info, char ***R, int *nb);

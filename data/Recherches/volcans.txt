@@ -4,3 +4,5 @@
 3|45|Etna|
 4|12|Vesuve|
 5|9|Kilauea|
+6|60|Vesuvio|
+5|30|Hefljiakl|
