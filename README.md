@@ -27,8 +27,8 @@ form of the order: COMMAND.PARAMETER dont forget the . it will execute without p
   * LIGNE 
 * DELETE 
   * ALL 
-  * TABLE 
-  * LIGNE 
+  * TABLES 
+  * LINE 
 * SELECT
   * " * "
   * TABLE
