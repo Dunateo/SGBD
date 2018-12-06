@@ -3,6 +3,7 @@
 #include <string.h>
 #include "fichier.h"
 #include "SQL.h"
+#include "initialisation.h"
 #include "split.h"
 
 struct {
@@ -148,7 +149,11 @@ void insert(char *param, BDD *trans){
 HELP
 **/
 void helpp(char *param, BDD *trans){
-  system("bash ./script/help.sh");
+
+  if(strcmp(param,"ALL") == 0){
+    system("bash ./script/help.sh");
+  }
+
 }
 
 /**
@@ -216,7 +221,7 @@ void gerePoint(BDD *select){
   trans = *select;
   unsigned int i;
   for (;;) {
-      printf("commande>>" );
+      printf(""PURPLE"%s"Class">>",trans.nomBDD );
       scanf("%s", nom );//fonction choisie
     fonct(nom, &cmd, &nb);
     enleveCara(cmd[1]);

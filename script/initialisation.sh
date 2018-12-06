@@ -1,6 +1,7 @@
 #!/bin/bash
 if [ -d "data" ];then
-  echo "Initialisation";
+  echo -e "\033[35;1mBienvenue sur DGBD----------------\033[0m";
+  echo " ";
 else
 echo "Problème il manque le dossier data Cccccréation !";
 mkdir data

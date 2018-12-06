@@ -3,6 +3,7 @@
 #include <string.h>
 #include "fichier.h"
 #include "SQL.h"
+#include "initialisation.h"
 #include "split.h"
 
 /**
@@ -11,7 +12,8 @@ Selection du mode
 void selectionMenu(int *valMenu){
   int val = 0;
   do {
-    printf("Merci de Sélectionner un Menu ?\n");
+    printf(""ROSE"Merci de Sélectionner un Menu ?"Class"\n");
+    printf(">");
     scanf("%d",&val);
 
   } while(val < 1 || val > 4);// deux seules valeurs que peut prendre le systeme
@@ -72,7 +74,8 @@ void selectFich(selection *select){
   strcpy(select->Table,"");
   //selection
   do {
-    printf("Le nom de la sélection ?\n");
+    printf(""VERT"Le nom de la sélection ?"Class"\n");
+    printf(">");
     scanf("%s", trans);
     snprintf(cmdtrans, sizeof cmdtrans, "cd ./data/%s/", trans);
   } while(system(cmdtrans) != 0);
@@ -84,14 +87,15 @@ void selectFich(selection *select){
   system(cmd);
   //selection
   do {
-    printf("Le nom de la Table?\n");
+    printf(""VERT"Le nom de la Table?"Class"\n");
+    printf(">");
     scanf("%s", transd);
     snprintf(cmddeux, sizeof cmddeux, "./data/%s/%s.txt",select->BDD ,transd);
   } while(fopen(cmddeux, "r") == NULL);
 
   //path to table
   snprintf(select->Table, sizeof select->Table, "%s.txt", transd);
-  printf("Voici votre sélection :%s\n",select->Table );
+  printf(""ROUGE"Voici votre sélection :%s\n"Class"",select->Table );
 
 }
 
@@ -111,8 +115,9 @@ void executionSelect(int valMenu, BDD *select){
     //CREATE
     case 2:
 
-    printf("1----------BDD\n");
-    printf("2----------TABLE\n");
+    printf(""ROUGE"1"Class"----------"YELLOW"BDD"Class"\n");
+    printf(""ROUGE"2"Class"----------"YELLOW"TABLE"Class"\n");
+    printf(">");
     scanf("%d",&valCs);
     if(valCs == 1){
       system("bash ./script/creationBDD.sh");
@@ -128,7 +133,7 @@ void executionSelect(int valMenu, BDD *select){
     case 3:
     //on vérifie si l'ultilisateur à sélectionné un directory
       if(strcmp(select->nomBDD,"") == 0){
-        printf("IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD\n");
+        printf(""VERT"IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD"Class"\n");
       }
       else{
         gerePoint(select);
