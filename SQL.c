@@ -23,7 +23,7 @@ void deletee(char *param, BDD *trans){
     printf("suppresion %s\n", trans->cheminBDD );
   }
   //delete table
-  else if(strcmp(param,"TABLES") == 0){
+  else if(strcmp(param,"TABLE") == 0){
 
     snprintf(cmd, sizeof cmd, "rm %s", trans->cheminTable);
     system(cmd);
@@ -90,9 +90,76 @@ void update(char *param, BDD *trans){
 INSERT
 **/
 void insert(char *param, BDD *trans){
-  char ligne[50],cmd[250], transips[100], **sortie;
-  int n, nbt, valeur1, valinutile;
+
+  char ligne[100],cmd[250],cmd2[500], transips[100], **sortie;
+  int n, nbt, valeur1, valinutile, nbligne = 0;
   float valfloat;
+
+  if(strcmp(param,"COL") == 0){
+      int l;
+      //selection table
+      snprintf(cmd, sizeof cmd, "cd %s; ls|cut -f1 -d'.'",trans->cheminBDD);
+      system(cmd);
+      printf("Entrer nom Table>>");
+      scanf("%s",transips );
+      //on test si la table existe si oui on l'affiche
+      for (int i = 0; i < trans->nbTable; i++) {
+        if(strcmp(transips,trans->Table[i].nomTable) == 0){
+          snprintf(cmd, sizeof cmd, "%s%s.txt",trans->cheminBDD,trans->Table[i].nomTable);
+          n = trans->Table[i].nbElement;
+          nbt = i;
+        }
+      }
+      //select numbers of COL to add
+      do {
+        printf("----------"YELLOW"nombres de colonnes?"Class"\n");
+        printf(">");
+        scanf("%d",&valinutile);
+        printf("%d\n",valinutile );
+      } while(valinutile < 0);
+      //updating the struct
+      trans->Table[nbt].nomElement = realloc(trans->Table[nbt].nomElement, sizeof(Element)* valinutile);
+      trans->Table[nbt].TypeElement = realloc(trans->Table[nbt].TypeElement, sizeof(int)* valinutile);
+      trans->Table[nbt].nbElement = trans->Table[nbt].nbElement + valinutile;
+      l = n;//first value of the new tab
+
+      for (int j = 0; j < valinutile; j++) {
+        //select the type of the new element
+        do{
+         printf(""ROUGE"1"Class"----------"YELLOW"INT"Class"\n");
+         printf(""ROUGE"2"Class"----------"YELLOW"CHAR"Class"\n");
+         printf(""ROUGE"3"Class"----------"YELLOW"FLOAT"Class"\n");
+         printf(""ROUGE"4"Class"----------"YELLOW"AUTO INCREMENT"Class"\n");
+         printf(">");
+         scanf("%d",&valeur1);
+       }while (valeur1 > 4 && valeur1 <1 );
+       //nom bdd
+       printf(""ROUGE"Nom ?\n"Class"");
+       printf(">");
+       scanf("%s",ligne);
+
+
+       //update name
+         trans->Table[nbt].TypeElement[l] = valeur1;
+         strcpy(trans->Table[nbt].nomElement[l].nom,ligne);
+
+
+       //set the new col
+       snprintf(cmd2, sizeof cmd2, " sed -i -e '1 s/$/%d.%s|/' %s",valeur1,ligne,cmd);
+       system(cmd2);
+        //set the new col to NULL
+        strcpy(cmd2,"");
+        snprintf(cmd2, sizeof cmd2,"sed -i -e '2,$s/$/NULL|/' %s",cmd);
+        system(cmd2);
+        l = l+1;
+
+
+      }
+
+
+
+
+  }
 
   if(strcmp(param,"LINE") == 0){
     FILE * f;
@@ -114,14 +181,24 @@ void insert(char *param, BDD *trans){
     if(f == NULL){
       printf("Impossible d'ouvrir la table\n");
     }
-    fscanf(f,"%s\n",transips);
+    while (fgets(transips, sizeof transips, f) != NULL) {
+      nbligne = nbligne + 1;
+    }
     fonctTable(transips, &sortie, &valinutile);
     fprintf(f, "\n");
     for (int i = 0; i < n; i++) {
       printf("%s\n", trans->Table[nbt].nomElement[i].nom );
       if(trans->Table[nbt].TypeElement[i] == 4){
-        valeur1 = atoi(sortie[0]);
-        valeur1 = valeur1 +1;
+
+        //if it's the first ligne we init the auto increment at 1
+        if (nbligne == 1) {
+          valeur1 = 1;
+        }else{
+          valeur1 = atoi(sortie[0]);
+          valeur1 = valeur1 +1;
+        }
+
+
         fprintf(f, "%d|",valeur1);
       }
       else if(trans->Table[nbt].TypeElement[i] == 3){
@@ -150,7 +227,7 @@ HELP
 **/
 void helpp(char *param, BDD *trans){
 
-  if(strcmp(param,"ALL") == 0){
+  if(strcmp(param,"*") == 0){
     system("bash ./script/help.sh");
   }
 
@@ -163,7 +240,7 @@ void selectt(char *param, BDD *trans){
   char cmd[250], transps[100];
 
   //Afficher la bdd déja présélectionné
-  if(strcmp(param,"ALL") == 0){
+  if(strcmp(param,"*") == 0){
     snprintf(cmd, sizeof cmd, "cd %s; ls|cut -f1 -d'.'",trans->cheminBDD);
     system(cmd);
     snprintf(cmd, sizeof cmd, "cat -s %s%s ",trans->cheminBDD,"*.txt");
@@ -173,7 +250,7 @@ void selectt(char *param, BDD *trans){
   }
 
   //Affiche la table
-  if(strcmp(param,"TABLES") == 0){
+  if(strcmp(param,"TABLE") == 0){
     //selection table
       snprintf(cmd, sizeof cmd, "cd %s; ls|cut -f1 -d'.'",trans->cheminBDD);
       system(cmd);
@@ -197,18 +274,7 @@ void selectt(char *param, BDD *trans){
   }
 }
 
-/**
-SET le caractère en trop à NULL
-**/
-void enleveCara(char *chaine){
-  int taille, n;
-  taille = strlen(chaine);
-  n=taille%4;
-  if(n<=1){
-    chaine[taille-1]=NULL;
-  }
 
-}
 
 /**
 Gestion des pointeurs de fonctions
@@ -224,7 +290,6 @@ void gerePoint(BDD *select){
       printf(""PURPLE"%s"Class">>",trans.nomBDD );
       scanf("%s", nom );//fonction choisie
     fonct(nom, &cmd, &nb);
-    enleveCara(cmd[1]);
     if (strcmp(nom, "END")==0) break;
     //parcours du tableau de pointeurs de fonctions depart de la case À on avance tant que i ne deborde pas du tableau et que le afonction demandée ("nom") n'est pas éga au nom de la focntion dans table[i].nom.
     for (i=0; i<NBF && strcmp(table[i].nom, cmd[0]) != 0; i++) ;

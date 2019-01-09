@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -d "data" ];then
-  echo -e "\033[35;1mBienvenue sur DGBD----------------\033[0m";
+  echo -e "\033[35;1mBienvenue sur DecemberDBMS----------------\033[0m";
   echo " ";
 else
 echo "Problème il manque le dossier data Cccccréation !";

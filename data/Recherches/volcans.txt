@@ -1,8 +1,11 @@
-4.id_volcan|1.densite_lave|2.nom_volcan|
-1|30|Python_de_la_fournaise|
-2|80|Kilimanjaro|
-3|45|Etna|
-4|12|Vesuve|
-5|9|Kilauea|
-6|60|Vesuvio|
-5|30|Hefljiakl|
+4.id_volcan|1.densite_lave|2.nom_volcan|1.hauteur|1.pkpas|
+1|30|Python_de_la_fournaise| NULL|NULL|
+2|80|Kilimanjaro| NULL|NULL|
+3|45|Etna| NULL|NULL|
+4|12|Vesuve| NULL|NULL|
+5|9|Kilauea| NULL|NULL|
+6|60|Vesuvio| NULL|NULL|
+5|30|Hefljiakl| NULL|NULL|
+5|30|Vesuve| NULL|NULL|
+6|60|Popocatepetl| NULL|NULL|
+7|8|kili|360|360|

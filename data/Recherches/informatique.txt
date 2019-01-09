@@ -1,2 +1,8 @@
-4.id_info|1.nb_ordi|
-1|35|0|
+4.id_info|1.nb_ordi|1.processeur|2.marque|2.puce|
+1|35|0|NULL|NULL|NULL|
+5|60|NULL|NULL|NULL|
+5|90|NULL|NULL|NULL|
+5|70|NULL|NULL|NULL|
+6|70|NULL|NULL|NULL|
+7|intel|NULL|
+8|6|6|amd|

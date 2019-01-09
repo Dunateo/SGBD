@@ -1,4 +1,5 @@
-4.id_geologie|1.nbroches|2.nom_roches|
+4.id_geologie|1.nbroches|2.nom_roches|1.granularite|
+1|450|Granite|NULL|NULL|
+5|val|gg|NULL|NULL|
 
-1|450|Granite|
-5|val|gg|
+6|6|moi|moi|8|

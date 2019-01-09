@@ -135,7 +135,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 
 			}
 
-			resultat[j][k+1] = '\0';
+			resultat[j][k] = '\0';
 		}
 		else if(j < *nbSep && j != 0)
 		{
@@ -144,7 +144,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 				resultat[j][k] = chaine[i];
 			}
 
-			resultat[j][k+1] = '\0';
+			resultat[j][k] = '\0';
 		}
 		else if(j == *nbSep)
 		{
@@ -153,7 +153,7 @@ void sousChaine(char *chaine, int *lgChaine, char **resultat, int position[20], 
 				resultat[j][k] = chaine[i];
 			}
 
-			resultat[j][k+1] = '\0';
+			resultat[j][k] = '\0';
 		}
 	}
 }

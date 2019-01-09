@@ -27,5 +27,5 @@ typedef struct selection{
 void selectPath(selection *select);
 void selectFich(selection *select);
 void selectionMenu(int *valMenu);
-void executionSelect(int valMenu, BDD *select);
+void executionSelect(int valMenu, BDD *select, int *etatSelect);
 void initialisationBDD(BDD *Base);

@@ -102,13 +102,14 @@ void selectFich(selection *select){
 /**
 Action selon le mode
 **/
-void executionSelect(int valMenu, BDD *select){
+void executionSelect(int valMenu, BDD *select, int *etatSelect){
   int valCs = 0;
 
   switch (valMenu) {
     //SELECTION
     case 1:system("bash ./script/affichageBDD.sh");
         initialisationBDD(select);
+        *etatSelect = *etatSelect +1;
     break;
 
 
@@ -132,8 +133,8 @@ void executionSelect(int valMenu, BDD *select){
     //COMMANDES
     case 3:
     //on vérifie si l'ultilisateur à sélectionné un directory
-      if(strcmp(select->nomBDD,"") == 0){
-        printf(""VERT"IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD"Class"\n");
+      if(*etatSelect == 0){
+        printf(""ROUGE"IMPOSSIBLE MALHEUREUX SELECTIONNE UNE BDD"Class"\n");
       }
       else{
         gerePoint(select);
