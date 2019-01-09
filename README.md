@@ -24,10 +24,11 @@ In order to implement a maximum of functions in a good looking program we establ
 form of the order: COMMAND.PARAMETER dont forget the . it will execute without parameters if you forget it.
 
 * INSERT 
-  * LIGNE 
+  * LINE
+  * COL
 * DELETE 
   * ALL 
-  * TABLES 
+  * TABLE
   * LINE 
 * SELECT
   * " * "
